@@ -8,4 +8,4 @@ Clutchify
 
 
 ##Boilerplate used
-https://github.com/geniuscarrier/webpack-angular-es6
+https://github.com/yannickglt/angular-webpack-boilerplate
