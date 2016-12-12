@@ -1,7 +1,7 @@
 {
-  "name": "angular-webpack-workflow",
+  "name": "Clutchify",
   "version": "1.0.0",
-  "description": "A workflow for Angular made with Webpack",
+  "description": "A Spotify Powered App for Fitness",
   "scripts": {
     "build": "webpack --config webpack.build.js --bail",
     "dev": "webpack-dev-server --history-api-fallback --inline --progress",
@@ -10,17 +10,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Foxandxss/angular-webpack-workflow.git"
+    "url": "https://github.com/etidbury/clutchify"
   },
-  "author": "Jesus Rodriguez",
+  "author": "Edward Tidbury",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Foxandxss/angular-webpack-workflow/issues"
+    "url": "https://github.com/etidbury/clutchify/issues"
   },
-  "homepage": "https://github.com/Foxandxss/angular-webpack-workflow",
+  "homepage": "https://github.com/etidbury/clutchify",
   "dependencies": {
     "angular": "^1.5.0",
-    "angular-ui-router": "^0.2.18"
+    "angular-ui-router": "^0.2.18",
+    "bootstrap-sass": "^3.3.7"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.8",

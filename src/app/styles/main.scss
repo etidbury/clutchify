@@ -21,6 +21,13 @@
 @import "layout/_theme";
 @import "layout/_print";
 
+
+//BOOTSTRAP
+@import "~bootstrap-sass/assets/stylesheets/_bootstrap-sprockets.scss";
+@import "~bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+
+
+
 // Components
 @import "../components/foo-bar/foo-bar";
 
