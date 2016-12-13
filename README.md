@@ -7,5 +7,9 @@ Clutchify
 
 
 
-##Boilerplate used
+##Libraries
+Boilerplate
 https://github.com/yannickglt/angular-webpack-boilerplate
+
+Setup Flow Types
+https://babeljs.io/docs/plugins/transform-flow-strip-types/
