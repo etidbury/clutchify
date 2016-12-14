@@ -1,44 +1,23 @@
 /*@ngInject*/
-class SpotifyAuthService {
+export default class SpotifyAuthService {
 
-    constructor($http,$localStorage) {
+    
+
+    constructor($localStorage) {
+        this.CLIENT_ID='4891aeb7078f4b85a2c1c976969bb047';//todo: inject as constant
+        this.REDIRECT_URI = 'http://localhost:8080/callback.html';//todo: inject as constant
         this.$localStorage=$localStorage;
-        this.$http = $http;
-        if (location.host == 'localhost:8000') {
+
+        //this.$scope=$scope;
+       /* if (location.host == 'localhost:8000') {
             this.CLIENT_ID = '409f070cb44945d9a85e9b4ad8fa3bf1';
             this.REDIRECT_URI = 'http://localhost:8000/callback.html';
         } else {
             this.CLIENT_ID = '9714921402b84783b2a207f1b6e82612';
             this.REDIRECT_URI = 'http://lab.possan.se/thirtify/callback.html';
         }
+*/
 
-
-        function checkUser(redirectToLogin) {
-            API.getMe().then(function(userInfo) {
-                Auth.setUsername(userInfo.id);
-                Auth.setUserCountry(userInfo.country);
-                if (redirectToLogin) {
-                    $scope.$emit('login');
-                    $location.replace();
-                }
-            }, function(err) {
-                $scope.showplayer = false;
-                $scope.showlogin = true;
-                $location.replace();
-            });
-        }
-
-
-        window.addEventListener("message", function(event) {
-            console.log('got postmessage', event);
-            var hash = JSON.parse(event.data);
-            if (hash.type == 'access_token') {
-                Auth.setAccessToken(hash.access_token, hash.expires_in || 60);
-                checkUser(true);
-            }
-        }, false);
-
-        $scope.isLoggedIn = (Auth.getAccessToken() != '');
 
 
 
@@ -52,6 +31,8 @@ class SpotifyAuthService {
     }
 
     openLoginWindow(){
+        console.log("SpotifyAuthService.js(39):");//fordebug: print log
+        console.log("openLoginWIndow");//fordebug: print log
         const url = this.getLoginURL([
             'user-read-private',
             'playlist-read-private',
@@ -73,19 +54,31 @@ class SpotifyAuthService {
         );
     }
     getAccessToken() {
-        const expires = 0 + this.$localStorage.getItem('pa_expires', '0');
+        const expires = 0 + (this.$localStorage.pa_expires||0);
 
         if ((new Date()).getTime() > expires) {
             return '';
         }
-        return this.$localStorage.getItem('pa_token');
+        return this.$localStorage.pa_token;
+    }
+    isAuthorised(){
+        return this.getAccessToken()||this.getAccessToken().length;
     }
 
     setAccessToken(token, expires_in) {
-        this.$localStorage.setItem('pa_token', token);
-        this.$localStorage.setItem('pa_expires', (new Date()).getTime() + expires_in);
+        this.$localStorage.pa_token= token;
+        this.$localStorage.pa_expires=new Date().getTime() + expires_in;
         // _token = token;
         // _expires = expires_in;
+    }
+    
+    setUsername(username) {
+        console.log("SpotifyAuthService.js(73):");//fordebug: print log
+        console.log("set username:"+username);//fordebug: print log
+        this.$localStorage.username= username;
+    }
+    getUsername(){
+        return this.$localStorage.username;
     }
 
 
@@ -96,5 +89,3 @@ class SpotifyAuthService {
 
      }*/
 }
-
-export default SpotifyAuthService;

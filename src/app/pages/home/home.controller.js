@@ -1,12 +1,11 @@
-class HomeController {
-  constructor() {
-    this.message = 'Hello'
-  }
-  foo() {
-    return 'world'
-  }
-}
+import SpotifyAuthService from '../../services/spotify/SpotifyAuthService'
 
-HomeController.$inject = []
+/*@ngInject*/
+class HomeController {
+  constructor(_SpotifyAuthService:SpotifyAuthService) {
+    this.username=_SpotifyAuthService.getUsername();
+  }
+
+}
 
 module.exports = HomeController
