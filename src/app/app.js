@@ -18,9 +18,8 @@ angular
     ])
     .service('_SpotifyAPIService', SpotifyAPIService)
     .service('_SpotifyAuthService', SpotifyAuthService)
-   // .service('AuthHelper', AuthHelper)
     .factory('sessionInjector',  function(_SpotifyAuthService) {
-        var sessionInjector ={
+        return {
             request: function (config) {
                 if (_SpotifyAuthService.isAuthorised()) {
                     config.headers['Authorization']= 'Bearer ' + _SpotifyAuthService.getAccessToken();
@@ -29,13 +28,10 @@ angular
                 return config;
             }
         };
-
-        return sessionInjector;
     })
 
-    .config(($urlRouterProvider,$httpProvider) => {
+    .config(($urlRouterProvider,$httpProvider:$httpProvider) => {
         $urlRouterProvider.otherwise('/login');
-
         $httpProvider.interceptors.push('sessionInjector');
     })
 
@@ -47,10 +43,7 @@ angular
 
         this.checkUser = function (redirectToLogin) {
             _SpotifyAPIService.getMe().then(function (userInfo) {
-                console.log("app.js(33):");//fordebug: print log
-                console.log("checkUser");//fordebug: print log
                 _SpotifyAuthService.setUsername(userInfo.data.display_name);
-                //Auth.setUserCountry(userInfo.country);
                 if (redirectToLogin) {
                     $location.path('/');
                 }
@@ -63,7 +56,6 @@ angular
         this.checkUser();
 
         window.addEventListener("message", function (event) {
-            console.log('got postmessage', event);
             var hash = JSON.parse(event.data);
             if (hash.type == 'access_token') {
                 _SpotifyAuthService.setAccessToken(hash.access_token, hash.expires_in || 60);
