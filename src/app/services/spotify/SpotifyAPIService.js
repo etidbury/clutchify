@@ -13,5 +13,9 @@ export default class SpotifyAPIService {
     getMe(){
         return this.$http.get(this.BASE_URI + '/me');
     }
+    getAudioFeatures(trackID){
+        //https://api.spotify.com/v1/audio-features/
+        return this.$http.get(this.BASE_URI + '/audio-features/'+trackID);
+    }
 
 }

@@ -5,7 +5,6 @@ import LoginTemplate from './login.template.html'
 
 // Directives
 import FooBar from '../../components/foo-bar/foo-bar.component'
-
 angular
   .module('app.login', [
     'ui.router'

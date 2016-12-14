@@ -62,6 +62,9 @@ angular
                 this.checkUser(true);
             }
         }.bind(this), false);
+        
+        
+        
     });
 
 
